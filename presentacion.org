@@ -1,0 +1,41 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+OPTIONS: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+OPTIONS: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
+#+OPTIONS: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+TITLE: Mi primera configuracion
+# #+DATE: <2017-01-31 mar>
+#+AUTHOR: Rock Neurotiko & Ignacio Ballesteros
+# #+EMAIL: miguelglafuente@gmail.com
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 25.1.1 (Org mode 9.0.3)
+#+LATEX_CLASS_OPTIONS: [a4paper,hidelinks]
+#+LATEX_CLASS_OPTIONS: [...,hidelinks]
+
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:t reveal_control:t
+#+OPTIONS: reveal_rolling_links:nil reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: linear
+#+REVEAL_THEME: league
+#+REVEAL_HLEVEL: 2
+#+REVEAL_EXTRA_CSS: ./acm.css
+#+REVEAL_HEAD_PREAMBLE: <meta name="description" content="ACM Presentation.">
+# #+REVEAL_SLIDE_FOOTER: <img src="./LogoACM_svg.svg" width="180" height="180">
+#+REVEAL_POSTAMBLE: <p> Created by rockneurotiko. </p>
+#+REVEAL_PLUGINS: (markdown notes zoom classList)
+#+REVEAL_EXTRA_JS: { src: './acm.js', async: true }
+#+REVEAL_TITLE_SLIDE_TEMPLATE: <div></div>
+
+#+OPTIONS: toc:nil
+
+
+* Introducción a emacs
+* Introducción a elisp
+* Mi primera configuración
+* Configuración modular
+* Configuración basada en org
+* Gracias
