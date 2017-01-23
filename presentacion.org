@@ -36,6 +36,21 @@
 * Introducción a emacs
 * Introducción a elisp
 * Mi primera configuración
+
+** Modulos a instalar
+- Tema
+- Helm
+- Multi-term
+- Reveal
+- Undo
+- git gutter
+- yasnippet
+- magit
+- spotify
+- Elixir
+- Scala
+- Python
+
 * Configuración modular
 * Configuración basada en org
 * Gracias
