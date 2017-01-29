@@ -82,12 +82,24 @@
 * Introducción a elisp
 
 ** Parentesis
-   #+BEGIN_SRC lisp
+   #+BEGIN_SRC elisp
    (todo (va (entre (parentesis))))
    #+END_SRC
 
-**
+  - Primera "palabra" es el comando, todo lo demas son argumentos
 
+  #+BEGIN_SRC elisp
+  (shell-command "ls")
+  #+END_SRC
+
+** Ejecutar
+   Para ejecutar elisp en emacs, C-x C-e
+
+   #+BEGIN_SRC elisp
+   (+ 1 2 3 4)
+
+   (/ (* 4 10) (+ 5 10))
+   #+END_SRC
 
 * Mi primera configuración
 

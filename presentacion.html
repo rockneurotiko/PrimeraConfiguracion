@@ -28,17 +28,17 @@
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h1 class="title">Mi primera configuracion</h1><h2 class="author">Rock Neurotiko &amp; Ignacio Ballesteros</h2><p class="date">Created: 2017-01-29 dom 13:23</p>
+<section id="sec-title-slide"><h1 class="title">Mi primera configuracion</h1><h2 class="author">Rock Neurotiko &amp; Ignacio Ballesteros</h2><p class="date">Created: 2017-01-29 dom 17:52</p>
 </section>
 
 
 <section>
-<section id="slide-orgb1677f8">
-<h2 id="orgb1677f8">Introducción a emacs</h2>
-<div class="outline-text-2" id="text-orgb1677f8">
+<section id="slide-orgce8a9f5">
+<h2 id="orgce8a9f5">Introducción a emacs</h2>
+<div class="outline-text-2" id="text-orgce8a9f5">
 </div></section>
-<section id="slide-orgddbc302">
-<h3 id="orgddbc302">Que es?</h3>
+<section id="slide-orga4d6d95">
+<h3 id="orga4d6d95">Que es?</h3>
 <ul>
 <li>Editor de texto</li>
 <li>Configurable / Programable</li>
@@ -48,8 +48,8 @@
 </ul>
 
 </section>
-<section id="slide-org1359ede">
-<h3 id="org1359ede">Opiniones</h3>
+<section id="slide-org0d885d1">
+<h3 id="org0d885d1">Opiniones</h3>
 <ul>
 <li>Es un entorno donde creas tu propia herramienta como quieras. Es divertido como LEGO, hay infinitos modos de jugar con ello. (reddit)</li>
 <li><p>
@@ -75,8 +75,8 @@ Such reliable tools help you stop thinking about tools, and start creating the a
 </ul>
 
 </section>
-<section id="slide-org1123881">
-<h3 id="org1123881">Opiniones propias</h3>
+<section id="slide-org03665d1">
+<h3 id="org03665d1">Opiniones propias</h3>
 <ul>
 <li>Es una herramienta que me permite abstraerme de todo y realizar todo en un lugar, y si no tengo algo, lo puedo crear. (Rock)</li>
 <li>&#x2026; (Ignacio)</li>
@@ -85,8 +85,8 @@ Such reliable tools help you stop thinking about tools, and start creating the a
 
 
 </section>
-<section id="slide-orgc2cf9ba">
-<h3 id="orgc2cf9ba">Comandos</h3>
+<section id="slide-org8013ac7">
+<h3 id="org8013ac7">Comandos</h3>
 <ul>
 <li>Control (C)</li>
 <li>Alt (Meta) (M)</li>
@@ -98,8 +98,8 @@ Such reliable tools help you stop thinking about tools, and start creating the a
 </ul>
 
 </section>
-<section id="slide-orgf0ae4fb">
-<h3 id="orgf0ae4fb">Moverse</h3>
+<section id="slide-orgf35de32">
+<h3 id="orgf35de32">Moverse</h3>
 <ul>
 <li>C-p, flecha arriba</li>
 <li>C-n, flecha abajo</li>
@@ -110,8 +110,8 @@ Such reliable tools help you stop thinking about tools, and start creating the a
 </ul>
 
 </section>
-<section id="slide-org0546456">
-<h3 id="org0546456">Atajos basicos</h3>
+<section id="slide-org6af1d4b">
+<h3 id="org6af1d4b">Atajos basicos</h3>
 <ul>
 <li>C-x C-c</li>
 <li>C-x C-s (Guardar)</li>
@@ -123,28 +123,53 @@ Such reliable tools help you stop thinking about tools, and start creating the a
 </section>
 </section>
 <section>
-<section id="slide-org0867803">
-<h2 id="org0867803">Introducción a elisp</h2>
-<div class="outline-text-2" id="text-org0867803">
+<section id="slide-org8a02891">
+<h2 id="org8a02891">Introducción a elisp</h2>
+<div class="outline-text-2" id="text-org8a02891">
 </div></section>
-<section id="slide-orgf56c328">
-<h3 id="orgf56c328">Parentesis</h3>
+<section id="slide-orgffa0bf0">
+<h3 id="orgffa0bf0">Parentesis</h3>
 <div class="org-src-container">
 
-<pre  class="src src-lisp">(todo (va (entre (parentesis))))
+<pre  class="src src-elisp"><span style="color: #ab7eff;">(</span>todo <span style="color: #06d8ff;">(</span>va <span style="color: #63de5d;">(</span>entre <span style="color: #ffac4a;">(</span>parentesis<span style="color: #ffac4a;">)</span><span style="color: #63de5d;">)</span><span style="color: #06d8ff;">)</span><span style="color: #ab7eff;">)</span>
 </pre>
 </div>
 
+<ul>
+<li>Primera "palabra" es el comando, todo lo demas son argumentos</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre  class="src src-elisp"><span style="color: #ab7eff;">(</span>shell-command <span style="color: #E6DB74;">"ls"</span><span style="color: #ab7eff;">)</span>
+</pre>
+</div>
+
+</section>
+<section id="slide-orgce72329">
+<h3 id="orgce72329">Ejecutar</h3>
+<p>
+Para ejecutar elisp en emacs, C-x C-e
+</p>
+
+<div class="org-src-container">
+
+<pre  class="src src-elisp"><span style="color: #ab7eff;">(</span>+ 1 2 3 4<span style="color: #ab7eff;">)</span>
+
+<span style="color: #ab7eff;">(</span>/ <span style="color: #06d8ff;">(</span>* 4 10<span style="color: #06d8ff;">)</span> <span style="color: #06d8ff;">(</span>+ 5 10<span style="color: #06d8ff;">)</span><span style="color: #ab7eff;">)</span>
+</pre>
+</div>
 
 </section>
 </section>
 <section>
-<section id="slide-orgc03e31e">
-<h2 id="orgc03e31e">Mi primera configuración</h2>
-<div class="outline-text-2" id="text-orgc03e31e">
+<section id="slide-org7fe2c41">
+<h2 id="org7fe2c41">Mi primera configuración</h2>
+<div class="outline-text-2" id="text-org7fe2c41">
 </div></section>
-<section id="slide-org0927457">
-<h3 id="org0927457">Modulos a instalar</h3>
+<section id="slide-orgc3625ea">
+<h3 id="orgc3625ea">Modulos a instalar</h3>
 <ul>
 <li>Tema</li>
 <li>Helm</li>
@@ -164,8 +189,8 @@ Such reliable tools help you stop thinking about tools, and start creating the a
 </section>
 </section>
 <section>
-<section id="slide-org8246ac5">
-<h2 id="org8246ac5">Configuración modular</h2>
+<section id="slide-org05789ee">
+<h2 id="org05789ee">Configuración modular</h2>
 <ul>
 <li>use-package</li>
 
@@ -173,13 +198,13 @@ Such reliable tools help you stop thinking about tools, and start creating the a
 </section>
 </section>
 <section>
-<section id="slide-org2887dc5">
-<h2 id="org2887dc5">Configuración basada en org</h2>
+<section id="slide-org8552232">
+<h2 id="org8552232">Configuración basada en org</h2>
 </section>
 </section>
 <section>
-<section id="slide-org99d72d9">
-<h2 id="org99d72d9">Gracias</h2>
+<section id="slide-orgc0b5d28">
+<h2 id="orgc0b5d28">Gracias</h2>
 </section>
 </section>
 </div>
