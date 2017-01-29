@@ -21,7 +21,7 @@
 #+REVEAL_MAX_SCALE: 2.5
 #+REVEAL_TRANS: linear
 #+REVEAL_THEME: league
-#+REVEAL_HLEVEL: 2
+#+REVEAL_HLEVEL: 1
 #+REVEAL_EXTRA_CSS: ./acm.css
 #+REVEAL_HEAD_PREAMBLE: <meta name="description" content="ACM Presentation.">
 # #+REVEAL_SLIDE_FOOTER: <img src="./LogoACM_svg.svg" width="180" height="180">
@@ -34,7 +34,61 @@
 
 
 * Introducción a emacs
+
+** Que es?
+   - Editor de texto
+   - Configurable / Programable
+   - Completamente libre (GNU Emacs GPL, Stallman style)
+   - Raton, que raton?
+
+** Opiniones
+   - Es un entorno donde creas tu propia herramienta como quieras. Es divertido como LEGO, hay infinitos modos de jugar con ello. (reddit)
+   - I like Emacs for the same reason I like the piano.
+
+     My knowledge and learning will take me far.
+
+     I used both 30 years ago.
+
+     I will use both 30 years from now if I am still around.
+
+     Such reliable tools help you stop thinking about tools, and start creating the art or engineering that is your gift to the rest of us.
+
+** Opiniones propias
+   - Es una herramienta que me permite abstraerme de todo y realizar todo en un lugar, y si no tengo algo, lo puedo crear. (Rock)
+   - ... (Ignacio)
+
+
+** Comandos
+   - Control (C)
+   - Alt (Meta) (M)
+   - Windows (Super) (s)
+   - M-x (Simples)
+   - C-x C-s (Multiples combinadas)
+   - C-h k (Con letras sueltas)
+
+** Moverse
+   - C-p, flecha arriba
+   - C-n, flecha abajo
+   - C-b, flecha izquierda
+   - C-f, flecha derecha
+   - C-s / C-r, buscar
+
+** Atajos basicos
+   - C-x C-c
+   - C-x C-s (Guardar)
+   - M-x
+   - C-h [f | m | v]
+
 * Introducción a elisp
+
+** Parentesis
+   #+BEGIN_SRC lisp
+   (todo (va (entre (parentesis))))
+   #+END_SRC
+
+**
+
+
 * Mi primera configuración
 
 ** Modulos a instalar
@@ -52,5 +106,6 @@
 - Python
 
 * Configuración modular
+  - use-package
 * Configuración basada en org
 * Gracias
