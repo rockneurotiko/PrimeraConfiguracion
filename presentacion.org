@@ -101,21 +101,23 @@
    (/ (* 4 10) (+ 5 10))
    #+END_SRC
 
-* Mi primera configuración
+* Sin configuracion
 
 ** Modulos a instalar
-- Tema
-- Helm
-- Multi-term
-- Reveal
-- Undo
-- git gutter
-- yasnippet
-- magit
-- spotify
-- Elixir
-- Scala
-- Python
+  - Tema
+  - Helm
+  - Multi-term
+  - Reveal
+  - Undo
+  - git gutter
+  - yasnippet
+  - magit
+  - spotify
+  - Elixir
+  - Scala
+  - Python
+
+* Mi primera configuración
 
 * Configuración modular
   - use-package
