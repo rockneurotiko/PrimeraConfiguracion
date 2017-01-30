@@ -112,23 +112,36 @@
 
 * Sin configuracion
 
+** Configurar melpa
+
+   En ~/.emacs.d/init.el
+
+   #+BEGIN_SRC elisp :tangle no
+   (require 'package) ;; You might already have this line
+   (add-to-list 'package-archives
+   '("melpa" . "https://melpa.org/packages/"))
+   (when (< emacs-major-version 24)
+   ;; For important compatibility libraries like cl-lib
+   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+   (package-initialize) ;; You might already have this line
+   #+END_SRC
+
 ** Modulos a instalar
-  - Tema
-  - Helm
+  - Tema (zenburn-theme)
   - Multi-term
-  - Reveal
-  - Undo
-  - git gutter
+  - Reveal (ox-reveal)
+  - Undo (undo-tree)
+  - git gutter (git-gutter-fringe+)
   - yasnippet
   - magit
   - spotify
-  - Elixir
-  - Scala
-  - Python
+  - Elixir (elixir-mode && alchemist)
+  - Scala (scala-mode)
+  - Python (elpy)
 
 * Mi primera configuración
 
-#+BEGIN_SRC elisp :tangle init.el
+ #+BEGIN_SRC elisp :tangle init.el
 
   (when (>= emacs-major-version 24)
     (require 'package)
@@ -155,7 +168,7 @@
 #+END_SRC
 * Configuración basada en org
 ** ¿Qué es org-mode?
-/Modo/ de Emacs para editar texto plano orientado a notas. 
+/Modo/ de Emacs para editar texto plano orientado a notas.
 
 - (Parece poca cosa)
 
