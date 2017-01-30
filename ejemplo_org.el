@@ -1,0 +1,744 @@
+* Init
+:PROPERTIES:
+:tangle:   ~/.emacs.d/init.el
+:END:
+
+#+BEGIN_SRC elisp
+;; (add-to-list 'load-path "~/.emacs.d/config/")
+;; (add-to-list 'load-path "~/.emacs.d/plugins/")
+
+;; (require 'package-management-settings)
+
+;; (require 'interface-settings)
+
+;; (require 'navigation-settings)
+
+;; (require 'project-management-settings)
+
+;; (require 'programming-settings)
+
+;; (require 'programming-language-settings)
+
+;; (require 'visual-settings)
+
+;; (require 'editing-settings)
+
+;; (require 'notes-settings)
+
+;; (require 'version-control-settings)
+
+;; (require 'console-settings)
+
+#+END_SRC
+
+* Basic Config
+:PROPERTIES:
+:tangle: ~/.emacs.d/config/package-management-settings.el
+:END:
+** Melpa, marmalade
+
+Milkypostman’s Emacs Lisp Package Archive - https://melpa.org/#/
+
+De este repositorio se descargarán los paquetes que instalaremos en
+Emacs. Antes comprobamos que realmente podemos usarlo al tener una
+versión correcta de Emacs.
+
+Añadimos también ~melpa stable~ para evitar algunos conflictos con los paquetes.
+
+#+BEGIN_SRC elisp :tangle yes
+
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (add-to-list
+   'package-archives
+   '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list
+   'package-archives
+   '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+  (package-initialize))
+
+#+END_SRC
+
+** Use-package
+
+~Use-package~ es un paquete que nos permite instalar y configurar
+paquetes de Emacs de forma cómoda y más compacta.
+
+Para automatizar más la instalación, comprobamos si ya tenemos
+instalado ~use-package~, y si no lo tenemos, lo instalamos.
+
+https://github.com/jwiegley/use-package
+
+#+BEGIN_SRC elisp :tangle yes :mkdirp yes
+
+(unless (featurep 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package)
+  )
+
+#+END_SRC
+
+** Backup files
+
+Para evitar que Emacs nos llene los directorios con archivos propios
+de /backups/ determinamos que los guarde automáticamente en el
+directorio ~.emacs.d/backup/~. /*NOT WORKING*/
+
+#+BEGIN_SRC elisp :tangle yes
+
+(setq make-backup-files nil) ;; Hello GIT
+
+;; (setq backup-directory-alist '(("" . "~/.emacs.d/backup")))
+
+#+END_SRC
+
+* Interface
+:PROPERTIES:
+:tangle:   ~/.emacs.d/config/interface-settings.el
+:END:
+** Sesión
+Aunque por lo general use Emacs en modo ~daemon~, entre sesión y
+sesión se puede establecer que nos guarde el escritorio.
+
+#+BEGIN_SRC elisp :tangle yes
+					;(desktop-save-mode 1)
+#+END_SRC
+
+** Emacs bars
+
+Para una interfaz más limpia y sin botones a la vista
+(shortcuts/macros al poder), eliminamos todas las barras y botones que
+vienen por defecto con la interfaz de Emacs.
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (tooltip-mode -1)
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+
+#+END_SRC
+
+** Tema
+
+Me encanta /Darkokai/
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package darkokai-theme
+    :ensure t
+    :init (load-theme 'darkokai t))
+
+#+END_SRC
+* Navigation
+:PROPERTIES:
+:tangle:   ~/.emacs.d/config/navigation-settings.el
+:END:
+** Avy
+
+[[https://github.com/abo-abo/avy][Avy]] - Nos permite saltar a cualquier linea, palabra o caracter
+visible.
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package avy
+    :ensure t
+    :bind (("C-:" . avy-goto-char)
+           ("C-." . avy-goto-char2)
+           ("M-g g" . avy-goto-line)
+           ("M-g w" . avy-goto-word-1)))
+#+END_SRC
+
+** WindMove
+
+[[http://www.emacswiki.org/emacs/WindMove][windmove]] - =[built-in]= Tired with =C-x o=? Now you can use =shift+arrows= to jump between windows.
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package windmove
+    :ensure t
+    :bind (("C-c <up>" . windmove-up)
+           ("C-c <left>" . windmove-left)
+           ("C-c <right>" . windmove-right)
+           ("C-c <down>" . windmove-down))
+    )
+
+#+END_SRC
+
+** ido
+
+Ido es un modo que nos permite visualizar los datos de autocompletado
+para manejarnos entre búsquedas de ficheros o cambios de buffers.
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package ido
+    :init (ido-mode))
+
+#+END_SRC
+
+* Project Management
+:PROPERTIES:
+:tangle:   ~/.emacs.d/config/project-management-settings.el
+:END:
+** Projectile
+
+https://github.com/bbatsov/projeEmacs Lisp without the use of GNU ~find~ (but for performance sake an
+indexing mechanism backed by external commands exists as well).
+
+- Basis Usage
+
+| Keybinding               | Description                                                                                                |
+|--------------------------+------------------------------------------------------------------------------------------------------------|
+| ~C-c p f~       | Display a list of all files in the project. With a prefix argument it will clear the cache first.          |
+| ~C-c p F~       | Display a list of all files in all known projects.                                                         |
+| ~C-c p g~       | Display a list of all files at point in the project. With a prefix argument it will clear the cache first. |
+| ~C-c p 4 f~     | Jump to a project's file using completion and show it in another window.                                   |
+| ~C-c p 4 g~     | Jump to a project's file based on context at point and show it in another window.                          |
+| ~C-c p d~       | Display a list of all directories in the project. With a prefix argument it will clear the cache first.    |
+| ~C-c p 4 d~     | Switch to a project directory and show it in another window.                                               |
+| ~C-c p 4 a~     | Switch between files with the same name but different extensions in other window.                          |
+| ~C-c p T~       | Display a list of all test files(specs, features, etc) in the project.                                     |
+| ~C-c p l~       | Display a list of all files in a directory (that's not necessarily a project)                              |
+| ~C-c p s g~     | Run grep on the files in the project.                                                                      |
+| ~M-- C-c p s g~ | Run grep on `projectile-grep-default-files` in the project.                                                |
+| ~C-c p v~       | Run `vc-dir` on the root directory of the project.                                                         |
+| ~C-c p b~       | Display a list of all project buffers currently open.                                                      |
+| ~C-c p 4 b~     | Switch to a project buffer and show it in another window.                                                  |
+| ~C-c p 4 C-o~   | Display a project buffer in another window without selecting it.                                           |
+| ~C-c p a~       | Switch between files with the same name but different extensions.                                          |
+| ~C-c p o~       | Runs `multi-occur` on all project buffers currently open.                                                  |
+| ~C-c p r~       | Runs interactive query-replace on all files in the projects.                                               |
+| ~C-c p i~       | Invalidates the project cache (if existing).                                                               |
+| ~C-c p R~       | Regenerates the projects `TAGS` file.                                                                      |
+| ~C-c p j~       | Find tag in project's `TAGS` file.                                                                         |
+| ~C-c p k~       | Kills all project buffers.                                                                                 |
+| ~C-c p D~       | Opens the root of the project in `dired`.                                                                  |
+| ~C-c p e~       | Shows a list of recently visited project files.                                                            |
+| ~C-c p E~       | Opens the `.dirs-local.el` file of the project.                                                            |
+| ~C-c p s s~     | Runs `ag` on the project. Requires the presence of `ag.el`.                                                |
+| ~C-c p !~       | Runs `shell-command` in the root directory of the project.                                                 |
+| ~C-c p &~       | Runs `async-shell-command` in the root directory of the project.                                           |
+| ~C-c p c~       | Runs a standard compilation command for your type of project.                                              |
+| ~C-c p P~       | Runs a standard test command for your type of project.                                                     |
+| ~C-c p t~       | Toggle between an implementation file and its test file.                                                   |
+| ~C-c p 4 t~     | Jump to implementation or test file in other window.                                                       |
+| ~C-c p z~       | Adds the currently visited file to the cache.                                                              |
+| ~C-c p p~       | Display a list of known projects you can switch to.                                                        |
+| ~C-c p S~       | Save all project buffers.                                                                                  |
+| ~C-c p m~       | Run the commander (an interface to run commands with a single key).                                        |
+| ~C-c p ESC~     | Switch to the most recently selected Projectile buffer.                                                    |
+
+If you ever forget any of Projectile's keybindings just do a:
+
+~C-c p C-h~
+
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package projectile
+    :ensure t
+    :init (projectile-global-mode))
+
+#+END_SRC
+   
+* Programming
+:PROPERTIES:
+:tangle:   ~/.emacs.d/config/programming-settings.el
+:END:
+** YASnippets 
+:PROPERTIES:
+:tangle:   ~/.emacs.d/config/programming-settings.el
+:END:
+Para poder usar los snippets, necesitamos ejecutar antes estos comandos.
+
+#+BEGIN_SRC sh :tangle no
+
+$ mkdir -p ~/.emacs.d/plugins
+$ cd ~/.emacs.d/plugins
+$ git clone --recursive https://github.com/capitaomorte/yasnippet
+
+#+END_SRC
+
+Y esto es lo que necesitamos para configurarlo en Emacs.
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package yasnippet
+    :ensure t
+    :init (yas-global-mode 1)
+    :config
+    (define-key yas-minor-mode-map (kbd "<tab>") nil)
+    (define-key yas-minor-mode-map (kbd "TAB") nil)
+    (define-key yas-minor-mode-map (kbd "<C-tab>") 'yas-expand)
+    )
+
+#+END_SRC
+
+Para que no entre en conflicto con otros autocompletados, hacemos que
+los yasnippets se lancen con la combinación ~C-tab~.
+
+** auto-yasnippet
+
+Auto-yasnippet nos permite crear snippets locales. Por ejemplo:
+
+#+BEGIN_SRC java :tangle no
+
+  count_of_red = get_total("red");
+  count_of_blue = get_total("blue");
+  count_of_green = get_total("green");
+
+#+END_SRC
+
+Para poder crear esto, antes tenemos que definir lo siguiente:
+
+#+BEGIN_SRC java :tangle no
+
+  count_of_~red = get_total("~red");
+
+#+END_SRC
+
+A "~" is representing a variable. To create a auto-snippet, que
+execute command aya-create (which I binded to C-x a). This replace de
+variable with it value, and save the snipppet.
+
+/~/ representa una variable. Para crear el snippet local tenemos que
+ejecutar el comando ~aya-create~, bindeado a ~C-x a~. Este comando
+reemplaza la varible por su valor y guarda el snippet.
+
+#+BEGIN_SRC java :tangle no
+
+  count_of_red = get_total("red");
+
+#+END_SRC
+
+Para volver a usar el snippet guardado necesitamos
+expandirlo. Ejecutamos el comando ~aya-expand~ asociado a ~C-x e~ y se
+nos prepara el snippet con el cursor correctamente colocado.
+
+#+BEGIN_SRC java :tangle no
+
+  count_of_red = get_total("red");
+  count_of_ = get_total("");
+
+#+END_SRC
+
+La configuración correspondiente:
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package auto-yasnippet
+    :ensure t
+    :bind (("C-x a" . aya-create)
+           ("C-x e" . aya-expand)
+           ("C-o" . aya-open-line)))
+#+END_SRC
+** SmartParens
+
+[[https://github.com/Fuco1/smartparens][Smartparens]] - Deals with parens pairs and tries to be smart about it.
+
+ https://ebzzry.github.io/emacs-pairs.html
+
+#+BEGIN_SRC elisp :tangle yes
+  (use-package smartparens-config
+    :ensure smartparens
+    :config
+    (progn (show-smartparens-global-mode t)))
+
+  (setq sp-highlight-wrap-overlay nil)
+  (setq sp-highlight-pair-overlay nil)
+  (setq sp-highlight-wrap-overlay nil)
+
+  (add-hook 'prog-mode-hook 'turn-on-smartparens-mode)
+  (add-hook 'markdown-mode-hook 'turn-on-smartparens-mode)
+#+END_SRC
+
+** Aggresive-indent
+
+[[https://github.com/Malabarba/aggressive-indent-mode][Aggressive-indent]] - Keeps your code always indented automatically.
+
+Sin embargo, no lo uso en todos los lenguajes.
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package aggressive-indent
+    :ensure t
+    :init
+    (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+    (add-hook 'css-mode-hook #'aggressive-indent-mode)
+    )
+
+#+END_SRC
+** Auto-complete
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package auto-complete
+    :ensure t
+    :config (ac-config-default))
+
+#+END_SRC
+** Company-mode
+
+ [[https://company-mode.github.io/][Company]] - A text completion framework.
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package company-mode
+    :init
+    (add-hook 'after-init-hook 'global-company-mode))
+
+#+END_SRC
+
+I will add company-quickhelp. You can use it with M-h and show
+documentation next to company options.
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package company-quickhelp
+    :ensure t
+    :init (company-quickhelp-mode 1)
+    :config (eval-after-load 'company
+              '(define-key company-active-map (kbd "C-c h") #'company-quickhelp-manual-begin)))
+
+#+END_SRC
+* Programming Language
+:PROPERTIES:
+:tangle:   ~/.emacs.d/config/programming-language-settings.el
+:END:
+** Haskell
+
+ [[https://github.com/haskell/haskell-mode][haskell-mode]] - Major mode for Haskell.
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package haskell-mode
+    :ensure t
+    :mode "\\.hs\\'"
+    :config 
+    (add-hook 'haskell-mode-hook 'turn-on-haskell-doc)
+    (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+    (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+    )
+
+#+END_SRC
+** Scala
+ [[https://github.com/hvesalai/scala-mode2][scala-mode2]] - scala major mode for emacs 24. Based on the Scala
+ Language Specification 2.9
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package scala-mode2
+    :interpreter
+    ("scala" . scala-mode))
+
+#+END_SRC
+
+ [[http://ensime.github.io/][Ensime]] - ENhanced Scala Interaction Mode for Emacs
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package ensime
+    :pin melpa-stable
+    :ensure t
+    :commands ensime ensime-mode
+    :init  (add-hook 'scala-mode-hook 'ensime-mode))
+
+
+#+END_SRC
+
+** Python
+
+[[https://github.com/jorgenschaefer/elpy][Elpy]] is probably the best module for programming in python. Elpy is an
+Emacs package to bring powerful Python editing to Emacs. It combines
+and configures a number of other packages, both written in Emacs Lisp
+as well as Python.
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package elpy
+    :ensure t
+    :mode "\\.hs\\'"
+    :init (elpy-enable))
+
+#+END_SRC
+
+** Matlab
+
+We will need to add ~matlab~ to our path. With a symlink.
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package matlab-mode
+    :ensure t
+    :mode ("\\.m$\\'" . matlab-mode)
+    :config
+    (setq matlab-indent-function t)
+    (setq matlab-shell-command "matlab")
+    (setq matlab-shell-command-switches (list "-nodesktop"))
+    )
+
+#+END_SRC   
+** Erlang
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package erlang  
+      :ensure t
+      :mode "\\.erl\\'"
+      :config (erlang-mode)
+      )
+
+#+END_SRC
+* Visual
+:PROPERTIES:
+:tangle:   ~/.emacs.d/config/visual-settings.el
+:END:
+** Rainbow Delimiters
+
+https://github.com/Fanael/rainbow-delimiters
+
+#+BEGIN_SRC elisp :tangle yes
+  (use-package rainbow-delimiters
+    :ensure t
+    :init
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+    )
+#+END_SRC
+<2016-04-12 mar 11:13>
+
+** Rainbow Mode
+
+[[https://julien.danjou.info/projects/emacs-packages][Rainbow-mode]] - Display color on color-code string (hex/rgb) directly.
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package rainbow-mode
+    :ensure t
+    :mode "\\.css\\'"
+    )
+
+#+END_SRC
+
+<2016-04-13 mié 00:42>
+* Editing
+:PROPERTIES:
+:tangle:   ~/.emacs.d/config/editing-settings.el
+:END:
+
+** Multiple cursors
+
+ [[https://github.com/magnars/multiple-cursors.el][Multiple cursors]] - Mark, edit multiple lines at once.
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package multiple-cursors
+    :ensure t
+    :bind (("C-S-c C-S-c" . mc/edit-lines)
+           ("C->" . mc/mark-next-like-this)
+           ("C-<" . mc/mark-previous-like-this)
+           ("C-c C-<" . mc/add-cursor-on-click))
+    )
+
+#+END_SRC
+
+* Notes
+:PROPERTIES:
+:tangle:   ~/.emacs.d/config/notes-settings.el
+:END:
+** Org Babel
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((dot . t)
+     (latex . t)
+     (java . t)
+     (sh . t)
+     (python . t)
+     ))
+
+#+END_SRC
+** Minted
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package ox-latex
+    :init (add-to-list 'org-latex-packages-alist '("" "minted"))
+    (setq org-latex-listings 'minted)
+    (setq org-latex-pdf-process
+          '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))    
+    )
+
+#+END_SRC
+
+** Ox - Reveal
+
+https://github.com/yjwen/org-reveal
+
+Whe need some things to install in order to make this work properly,
+bur it's not needed if you are not going to use org-reveal.
+
+First, whe have to install reveal.js from [[https://github.com/hakimel/reveal.js/][here]] and do the [[https://github.com/hakimel/reveal.js/#installation][full setup]],
+wich requires =Node.js= and =Grunt=.
+
+Once we have installed reveal.js, you should change de
+=org-reveal-root= variable in the next code block with your own path:
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package ox-reveal
+    :ensure t
+    :config
+    (setq org-reveal-root "file:///home/ignaciobll/reveal.js")
+    )
+
+#+END_SRC
+** Auto-fill
+
+#+BEGIN_SRC elisp :tangle yes 
+
+  (use-package auto-fill-mode
+    :bind ("C-c q" . turn-on-auto-fill-mode)
+    :init (add-hook 'org-mode-hook 'turn-on-auto-fill)
+    :config (add-hook 'org-mode-hook 'xah-math-input-mode))
+
+#+END_SRC
+** Org tree slide
+#+BEGIN_SRC elisp :tangle yes
+
+(use-package org-tree-slide
+  :ensure t
+  :config
+  (define-key org-tree-slide-mode-map (kbd "<f9>")
+    'org-tree-slide-move-previous-tree)
+  (define-key org-tree-slide-mode-map (kbd "<f10>")
+    'org-tree-slide-move-next-tree)
+  (define-key org-tree-slide-mode-map (kbd "<f11>")
+    'org-tree-slide-content)
+  (org-tree-slide-narrowing-control-profile)
+  (setq org-tree-slide-skip-outline-level 4)
+  (setq org-tree-slide-skip-done nil)
+  :bind (("<f8>" . org-tree-slide-mode)
+         ("S-<f8>" . org-tree-slide-skip-done)))
+
+#+END_SRC
+** xah-math-input
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package xah-math-input
+    :ensure t)
+
+#+END_SRC
+
+** toc-org
+
+Toc-org add a :toc: headline at the top of the org document. 
+
+https://github.com/snosov1/toc-org
+
+Shortcut to a =:Toc:= tag:  =C-c C-q T RET=
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package toc-org
+    :ensure t
+    :init (add-to-list 'org-tag-alist '("TOC" . ?T)))
+
+#+END_SRC
+
+** Markdown
+
+#+BEGIN_SRC elisp :tangle yes
+  (use-package markdown-mode
+    :ensure t
+    :commands (markdown-mode gfm-mode)
+    :mode (("README\\.md\\'" . gfm-mode)
+           ("\\.md\\'" . markdown-mode)
+           ("\\.markdown\\'" . markdown-mode))
+    :init (setq markdown-command "multimarkdown"))
+#+END_SRC
+
+** Cheatsheet
+
+Cuando se quieren aprender nuevos módulos, es útil tener una lista con
+las combinaciones de teclado más comunes para recordar fácilmente cómo
+hacer las acciones básicas.
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package cheatsheet
+    :ensure t
+    :config
+    (cheatsheet-add :group 'Erlang
+                    :key "C-c C-q"
+                    :description "Indents the current Erlang function. - (erlang-indent-function)")
+    (cheatsheet-add :group 'Erlang
+		    :key "C-c C-j"
+		    :description "Create a new clause in the current Erlang function. The point is placed between the parentheses of the argument list.  (erlang-generate-new-clause)")
+    (cheatsheet-add :group 'Erlang 
+		    :key "C-c C-y" 
+		    :description "Copy the function arguments of the preceding Erlang clause. This command is useful when defining a new clause with almost the same argument as the preceding.  (erlang-clone-arguments)")
+    (cheatsheet-add :group 'Erlang 
+		    :key "C-c C-a" 
+		    :description "aligns arrows after clauses inside a region.  (erlang-align-arrows)")
+    (cheatsheet-add :group 'Erlang
+                    :key "C-c C-k"
+                    :description "Kompila ")
+    (cheatsheet-add :group 'Erlang
+                    :key "C-c C-z"
+                    :description "Abre una nueva terminal interactiva de Erlang")  
+    (cheatsheet-add :group 'Emacs
+                    :key "C-x r s r"
+                    :description "Copy region into register r (copy-to-register).")
+    (cheatsheet-add :group 'Emacs
+                    :key "C-x r i r"
+                    :description "Insert text from register r (insert-register).")
+
+    :bind ("C-c C-s" . cheatsheet-show)
+    )
+
+#+END_SRC
+* Version Control
+:PROPERTIES:
+:tangle:   ~/.emacs.d/config/version-control-settings.el
+:END:
+** Magit 
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package magit
+    :ensure t
+    :bind (("C-x g" . magit-status)
+           ("C-x M-g" . magit-dispatch-popup))
+    )
+
+#+END_SRC
+
+* Console
+:PROPERTIES:
+:tangle: ~/.emacs.d/config/console-settings.el
+:END:
+
+** Multi-term
+
+#+BEGIN_SRC elisp :tangle yes
+
+  (use-package multi-term
+    :ensure t
+    :config (setq multi-term-program "/bin/zsh"))
+
+#+END_SRC
+* Google
+:PROPERTIES:
+:tangle: ~/.emacs.d/config/google-settings.el
+:END:
+
+LeMacsGTFY
+
+#+BEGIN_SRC elisp :tangle yes
+  (use-package google-this
+    :ensure t
+    :init (google-this-mode 1))
+#+END_SRC

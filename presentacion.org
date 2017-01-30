@@ -54,8 +54,11 @@
      Such reliable tools help you stop thinking about tools, and start creating the art or engineering that is your gift to the rest of us.
 
 ** Opiniones propias
-   - Es una herramienta que me permite abstraerme de todo y realizar todo en un lugar, y si no tengo algo, lo puedo crear. (Rock)
-   - ... (Ignacio)
+   - Es una herramienta que me permite abstraerme de todo y realizar
+     todo en un lugar, y si no tengo algo, lo puedo crear. (Rock)
+   - Las dinámicas de trabajo comunes se amparan en un entorno
+     único. Con Emacs puedo experimentar, conocer, y aprender con más
+     libertad. (Ignacio)
 
 
 ** Comandos
@@ -82,20 +85,20 @@
 * Introducción a elisp
 
 ** Parentesis
-   #+BEGIN_SRC elisp
+   #+BEGIN_SRC elisp :tangle no
    (todo (va (entre (parentesis))))
    #+END_SRC
 
   - Primera "palabra" es el comando, todo lo demas son argumentos
 
-  #+BEGIN_SRC elisp
+  #+BEGIN_SRC elisp :tangle no
   (shell-command "ls")
   #+END_SRC
 
 ** Ejecutar
    Para ejecutar elisp en emacs, C-x C-e
 
-   #+BEGIN_SRC elisp
+   #+BEGIN_SRC elisp :tangle no
    (+ 1 2 3 4)
 
    (/ (* 4 10) (+ 5 10))
@@ -125,7 +128,42 @@
 
 * Mi primera configuración
 
+#+BEGIN_SRC elisp :tangle init.el
+
+  (when (>= emacs-major-version 24)
+    (require 'package)
+    (add-to-list
+     'package-archives
+     '("melpa" . "http://melpa.org/packages/") t)
+    (add-to-list
+     'package-archives
+     '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+    (package-initialize))
+
+#+END_SRC
+
 * Configuración modular
   - use-package
+
+#+BEGIN_SRC elisp :tangle init.el
+
+  (unless (featurep 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package)
+    )
+
+#+END_SRC
 * Configuración basada en org
+** ¿Qué es org-mode?
+/Modo/ de Emacs para editar texto plano orientado a notas. 
+
+- (Parece poca cosa)
+
+- Para una lista más extensa :: http://orgmode.org/features.html
+** ¿Para qué lo vamos a usar hoy?
+- ORGanización de nuestra configuración.
+- ~org-babel-tangle- :: ~C-c C-v t~ en este fichero ([[./presentacion.org]])
+- Ya tenemos nuestro código en el fichero elegido :)
+- [[./init.el]]
+- [[./ejemplo_org.el][Ejemplo]] de configuración con /org/.
 * Gracias
