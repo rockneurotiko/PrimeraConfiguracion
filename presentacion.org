@@ -112,6 +112,10 @@
 
 * Sin configuración
 
+** Lo facil...
+
+  http://emacs-bootstrap.com/
+
 ** Configurar melpa
 
    En ~/.emacs.d/init.el
@@ -138,7 +142,6 @@
   - Elixir (elixir-mode && alchemist)
   - Scala (scala-mode)
   - Python (elpy)
-
 * Mi primera configuración
 
  #+BEGIN_SRC elisp :tangle init.el
