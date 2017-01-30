@@ -104,13 +104,13 @@
    (/ (* 4 10) (+ 5 10))
    #+END_SRC
 
-* Donde encontrar paquetes!
+* Dónde encontrar paquetes!
 
   - Melpa (https://melpa.org/)
   - Github
   - Google
 
-* Sin configuracion
+* Sin configuración
 
 ** Modulos a instalar
   - Tema
@@ -162,7 +162,8 @@
 - Para una lista más extensa :: http://orgmode.org/features.html
 ** ¿Para qué lo vamos a usar hoy?
 - ORGanización de nuestra configuración.
-- ~org-babel-tangle- :: ~C-c C-v t~ en este fichero ([[./presentacion.org]])
+- ~org-babel-tangle-
+  - ~C-c C-v t~    en este fichero (~presentacion.org~)
 - Ya tenemos nuestro código en el fichero elegido :)
 - [[./init.el]]
 - [[./ejemplo_org.el][Ejemplo]] de configuración con /org/.
