@@ -104,13 +104,13 @@
    (/ (* 4 10) (+ 5 10))
    #+END_SRC
 
-* Donde encontrar paquetes!
+* Dónde encontrar paquetes!
 
   - Melpa (https://melpa.org/)
   - Github
   - Google
 
-* Sin configuracion
+* Sin configuración
 
 ** Modulos a instalar
   - Tema
