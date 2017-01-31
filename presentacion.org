@@ -155,7 +155,7 @@
  - elpy
 
 * Mi primera configuración
-
+*** Package
  #+BEGIN_SRC elisp :tangle init.el
 
   (when (>= emacs-major-version 24)
@@ -169,31 +169,113 @@
     (package-initialize))
 #+END_SRC
 
+*** use-package
+
+  #+BEGIN_SRC elisp :tangle init.el
+
+  (unless (featurep 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package)
+    )
+
+  #+END_SRC
+
 ** Modulos a instalar
 
 **** Tema
-- zenburn-theme
+   - zenburn-theme
+     #+BEGIN_NOTES
+     #+BEGIN_SRC elisp :tangle no
+     (load-theme 'zenburn t)
+     #+END_SRC
+     #+END_NOTES
 **** Multi-term
-- multi-term
+   - multi-term
+     #+BEGIN_NOTES
+     #+BEGIN_SRC elisp :tangle no
+     (setq multi-term-buffer-name "term")
+     (setq multi-term-program "/bin/zsh")
+     (global-set-key (kbd "<f5>") 'multi-term)
+     (global-set-key (kbd "C-<next>")'multi-term-next)
+     (global-set-key (kbd "C-<prior>")'multi-term-prev)
+     #+END_SRC
+     #+END_NOTES
 **** Reveal
-- ox-reveal
+   - ox-reveal
+     #+BEGIN_NOTES
+     #+BEGIN_SRC elisp :tangle no
+     (setq org-reveal-root (concat "file://" (expand-file-name "~/.emacs.d/plugins/revealjs")))
+     #+END_SRC
+     #+END_NOTES
 **** Undo
-- undo-tree
+   - undo-tree
+     #+BEGIN_NOTES
+     #+BEGIN_SRC elisp :tangle no
+     (global-undo-tree-mode)
+     (setq undo-tree-visualizer-timestamps t)
+     (setq undo-tree-visualizer-diff t)
+     (global-set-key (kbd "C-z") 'undo)
+     (global-set-key (kbd "C-S-z") 'undo-tree-redo)
+     #+END_SRC
+     #+END_NOTES
 **** git gutter
-- git-gutter-fringe+
+   - git-gutter-fringe+
+     #+BEGIN_NOTES
+     #+BEGIN_SRC elisp :tangle no
+     (setq indicate-buffer-boundaries 'left)
+     (setq indicate-empty-lines +1)
+     (global-git-gutter+-mode 1)
+     (git-gutter-fr+-minimal)
+     #+END_SRC
+     #+END_NOTES
 **** yasnippet
-- yasnippet
+   - yasnippet
+     #+BEGIN_NOTES
+     #+BEGIN_SRC elisp :tangle no
+     (define-key yas-minor-mode-map (kbd "<tab>") nil)
+    (define-key yas-minor-mode-map (kbd "TAB") nil)
+    (define-key yas-minor-mode-map (kbd "<C-tab>") 'yas-expand)
+    (yas-global-mode 1)
+     #+END_SRC
+    #+END_NOTES
+
 **** magit
-- magit
+   - magit
+     #+BEGIN_NOTES
+     #+BEGIN_SRC elisp :tangle no
+     (setq magit-last-seen-setup-instructions "1.4.0")
+     (global-set-key (kbd "C-c g") 'magit-status)
+     #+END_SRC
+     #+END_NOTES
 **** spotify
-- spotify
+   - spotify
+     #+BEGIN_NOTES
+     #+BEGIN_SRC elisp :tangle no
+     (global-set-key (kbd "C-c s n") 'spotify-next)
+     (global-set-key (kbd "C-c s p") 'spotify-previous)
+     (global-set-key (kbd "C-c s t") 'spotify-playpause)
+     (global-set-key (kbd "C-c s c") 'spotify-current)
+     (global-set-key (kbd "C-c s v") 'spotify-enable-song-notifications)
+     (global-set-key (kbd "C-c s m") 'spotify-disable-song-notifications)
+     #+END_SRC
+     #+END_NOTES
 **** Elixir
-- elixir-mode
-- alchemist
+   - elixir-mode
+   - alchemist
 **** Scala
-- scala-mode
+   - scala-mode
+     #+BEGIN_NOTES
+     #+BEGIN_SRC elisp :tangle no
+     (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+     #+END_SRC
+     #+END_NOTES
 **** Python
-- elpy
+   - elpy
+     #+BEGIN_NOTES
+   #+BEGIN_SRC elisp :tangle no
+   (elpy-enable)
+   #+END_SRC
+   #+END_NOTES
 
 * Configuración modular
 *** use-package
@@ -247,13 +329,14 @@
     :defer t
     :ensure t
     :diminish undo-tree-mode
-    :init (defalias 'redo 'undo-tree-redo)
-    :config
+    :init
     (global-undo-tree-mode)
+    (defalias 'redo 'undo-tree-redo)
+    :config
     (setq undo-tree-visualizer-timestamps t)
     (setq undo-tree-visualizer-diff t)
     :bind (("C-z" . undo)
-           ("C-S-z" . redo)))
+           ("C-S-z" . undo-tree-redo)))
     #+END_SRC
            #+END_NOTES
 
