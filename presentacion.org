@@ -131,119 +131,30 @@
    #+END_SRC
 
 ** Modulos a instalar
-  - Tema (zenburn-theme)
-    #+BEGIN_SRC elisp :tangle no
-    (use-package zenburn-theme
-    :ensure t
-    :config (load-theme 'zenburn t))
-    #+END_SRC
-  - Multi-term
-    #+BEGIN_SRC elisp :tangle no
-    (use-package multi-term
-    :ensure t
-    :init (setq multi-term-buffer-name "term"
-     multi-term-program "/bin/zsh")
-    :bind (("<f5>" . multi-term)
-           ("<C-next>" . multi-term-next)
-           ("<C-prior>" . multi-term-prev)))
-    #+END_SRC
 
-  - Reveal (ox-reveal)
-    #+BEGIN_SRC elisp :tangle no
-    (use-package ox-reveal
-    :ensure t
-    :init (setq org-reveal-root (concat "file://" (expand-file-name "~/.emacs.d/plugins/revealjs"))))
-    #+END_SRC
-  - Undo (undo-tree)
-    #+BEGIN_SRC elisp :tangle no
-    (use-package undo-tree
-    ;; :disabled t
-    :defer t
-    :ensure t
-    :diminish undo-tree-mode
-    :init (defalias 'redo 'undo-tree-redo)
-    :config
-    (global-undo-tree-mode)
-    (setq undo-tree-visualizer-timestamps t)
-    (setq undo-tree-visualizer-diff t)
-    :bind (("C-z" . undo)
-           ("C-S-z" . redo)))
-    #+END_SRC
-  - git gutter (git-gutter-fringe+)
-    #+BEGIN_SRC elisp :tangle no
-    (use-package git-gutter-fringe+
-    :ensure t
-    :diminish git-gutter+-mode
-    :init
-    (setq-default indicate-buffer-boundaries 'left)
-    (setq-default indicate-empty-lines +1)
-    :config
-    (global-git-gutter+-mode 1)
-    (git-gutter-fr+-minimal))
-    #+END_SRC
-
-  - yasnippet
-    #+BEGIN_SRC elisp :tangle no
-    (use-package yasnippet
-    :ensure t
-    :diminish yas-minor-mode
-    :config
-    (define-key yas-minor-mode-map (kbd "<tab>") nil)
-    (define-key yas-minor-mode-map (kbd "TAB") nil)
-    (define-key yas-minor-mode-map (kbd "<C-tab>") 'yas-expand)
-    (yas-global-mode 1))
-    #+END_SRC
-
-  - magit
-    #+BEGIN_SRC elisp :tangle no
-    (use-package magit
-    :ensure t
-    :init
-    (setq magit-last-seen-setup-instructions "1.4.0")
-    :bind (("C-c g" . magit-status)
-    ("C-c C-c" . with-editor-finish)
-    ("C-c C-k" . with-editor-cancel)))
-    #+END_SRC
-
-  - spotify
-    #+BEGIN_SRC elisp :tangle no
-    (use-package spotify
-    :ensure t
-    :config (spotify-enable-song-notifications)
-    :bind (("C-c s n" . spotify-next)
-           ("C-c s p" . spotify-previous)
-           ("C-c s t" . spotify-playpause)
-           ("C-c s c" . spotify-current)
-           ("C-c s v" . spotify-enable-song-notifications)
-           ("C-c s m" . spotify-disable-song-notifications)))
-    #+END_SRC
-
-  - Elixir (elixir-mode && alchemist)
-    #+BEGIN_SRC elisp :tangle no
-    (use-package alchemist
-    :ensure t)
-    #+END_SRC
-
-  - Scala (scala-mode)
-    #+BEGIN_SRC elisp :tangle no
-    (use-package scala-mode
-    :ensure t)
-
-    (use-package ensime
-    :ensure t
-    :demand t
-    :pin melpa-stable
-    :config
-    (add-hook 'scala-mode-hook 'ensime-scala-mode-hook))
-    #+END_SRC
-
-  - Python (elpy)
-    #+BEGIN_SRC elisp :tangle no
-      (use-package elpy
-        :ensure t
-        :config
-        (elpy-enable))
-    #+END_SRC
+**** Tema
+- zenburn-theme
+**** Multi-term
+- multi-term
+**** Reveal
+- ox-reveal
+**** Undo
+- undo-tree
+**** git gutter
+- git-gutter-fringe+
+**** yasnippet
+- yasnippet
+**** magit
+- magit
+**** spotify
+- spotify
+**** Elixir
+- elixir-mode
+- alchemist
+**** Scala
+- scala-mode
+**** Python
+- elpy
 
 * Mi primera configuración
 
@@ -258,29 +169,196 @@
      'package-archives
      '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
     (package-initialize))
-
 #+END_SRC
 
-* Configuración modular
-  - use-package
+** Modulos a instalar
 
-#+BEGIN_SRC elisp :tangle init.el
+**** Tema
+- zenburn-theme
+**** Multi-term
+- multi-term
+**** Reveal
+- ox-reveal
+**** Undo
+- undo-tree
+**** git gutter
+- git-gutter-fringe+
+**** yasnippet
+- yasnippet
+**** magit
+- magit
+**** spotify
+- spotify
+**** Elixir
+- elixir-mode
+- alchemist
+**** Scala
+- scala-mode
+**** Python
+- elpy
+
+* Configuración modular
+*** use-package
+
+  #+BEGIN_SRC elisp :tangle init.el
 
   (unless (featurep 'use-package)
     (package-refresh-contents)
     (package-install 'use-package)
     )
 
-#+END_SRC
+  #+END_SRC
+
+*** Modulos
+
+**** Tema (zenburn-theme)
+    #+BEGIN_NOTES
+    #+BEGIN_SRC elisp :tangle no
+    (use-package zenburn-theme
+    :ensure t
+    :config (load-theme 'zenburn t))
+    #+END_SRC
+    #+END_NOTES
+**** Multi-term
+    #+BEGIN_NOTES
+    #+BEGIN_SRC elisp :tangle no
+    (use-package multi-term
+    :ensure t
+    :init (setq multi-term-buffer-name "term"
+     multi-term-program "/bin/zsh")
+    :bind (("<f5>" . multi-term)
+           ("<C-next>" . multi-term-next)
+           ("<C-prior>" . multi-term-prev)))
+    #+END_SRC
+           #+END_NOTES
+
+**** Reveal (ox-reveal)
+    #+BEGIN_NOTES
+    #+BEGIN_SRC elisp :tangle no
+    (use-package ox-reveal
+    :ensure t
+    :init (setq org-reveal-root (concat "file://" (expand-file-name "~/.emacs.d/plugins/revealjs"))))
+    #+END_SRC
+    #+END_NOTES
+
+**** Undo (undo-tree)
+    #+BEGIN_NOTES
+    #+BEGIN_SRC elisp :tangle no
+    (use-package undo-tree
+    ;; :disabled t
+    :defer t
+    :ensure t
+    :diminish undo-tree-mode
+    :init (defalias 'redo 'undo-tree-redo)
+    :config
+    (global-undo-tree-mode)
+    (setq undo-tree-visualizer-timestamps t)
+    (setq undo-tree-visualizer-diff t)
+    :bind (("C-z" . undo)
+           ("C-S-z" . redo)))
+    #+END_SRC
+           #+END_NOTES
+
+**** git gutter (git-gutter-fringe+)
+    #+BEGIN_NOTES
+    #+BEGIN_SRC elisp :tangle no
+    (use-package git-gutter-fringe+
+    :ensure t
+    :diminish git-gutter+-mode
+    :init
+    (setq-default indicate-buffer-boundaries 'left)
+    (setq-default indicate-empty-lines +1)
+    :config
+    (global-git-gutter+-mode 1)
+    (git-gutter-fr+-minimal))
+    #+END_SRC
+    #+END_NOTES
+
+**** yasnippet
+    #+BEGIN_NOTES
+    #+BEGIN_SRC elisp :tangle no
+    (use-package yasnippet
+    :ensure t
+    :diminish yas-minor-mode
+    :config
+    (define-key yas-minor-mode-map (kbd "<tab>") nil)
+    (define-key yas-minor-mode-map (kbd "TAB") nil)
+    (define-key yas-minor-mode-map (kbd "<C-tab>") 'yas-expand)
+    (yas-global-mode 1))
+    #+END_SRC
+    #+END_NOTES
+
+**** magit
+    #+BEGIN_NOTES
+    #+BEGIN_SRC elisp :tangle no
+    (use-package magit
+    :ensure t
+    :init
+    (setq magit-last-seen-setup-instructions "1.4.0")
+    :bind (("C-c g" . magit-status)
+    ("C-c C-c" . with-editor-finish)
+    ("C-c C-k" . with-editor-cancel)))
+    #+END_SRC
+    #+END_NOTES
+
+**** spotify
+    #+BEGIN_NOTES
+    #+BEGIN_SRC elisp :tangle no
+    (use-package spotify
+    :ensure t
+    :config (spotify-enable-song-notifications)
+    :bind (("C-c s n" . spotify-next)
+           ("C-c s p" . spotify-previous)
+           ("C-c s t" . spotify-playpause)
+           ("C-c s c" . spotify-current)
+           ("C-c s v" . spotify-enable-song-notifications)
+           ("C-c s m" . spotify-disable-song-notifications)))
+    #+END_SRC
+           #+END_NOTES
+
+**** Elixir (elixir-mode && alchemist)
+    #+BEGIN_NOTES
+    #+BEGIN_SRC elisp :tangle no
+    (use-package alchemist
+    :ensure t)
+    #+END_SRC
+    #+END_NOTES
+
+**** Scala (scala-mode)
+    #+BEGIN_NOTES
+    #+BEGIN_SRC elisp :tangle no
+    (use-package scala-mode
+    :ensure t)
+
+    (use-package ensime
+    :ensure t
+    :demand t
+    :pin melpa-stable
+    :config
+    (add-hook 'scala-mode-hook 'ensime-scala-mode-hook))
+    #+END_SRC
+    #+END_NOTES
+
+**** Python (elpy)
+    #+BEGIN_NOTES
+    #+BEGIN_SRC elisp :tangle no
+      (use-package elpy
+        :ensure t
+        :config
+        (elpy-enable))
+    #+END_SRC
+        #+END_NOTES
+
+
 * Configuración basada en org
 ** ¿Qué es org-mode?
 /Modo/ de Emacs para editar texto plano orientado a notas.
 
-- (Parece poca cosa)
+*** (Parece poca cosa)
 
-- Para una lista más extensa :: http://orgmode.org/features.html
+*** Para una lista más extensa :: http://orgmode.org/features.html
 ** ¿Para qué lo vamos a usar hoy?
-- ORGanización de nuestra configuración.
+*** ORGanización de nuestra configuración.
 - ~org-babel-tangle-
   - ~C-c C-v t~    en este fichero (~presentacion.org~)
 - Ya tenemos nuestro código en el fichero elegido :)
