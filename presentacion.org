@@ -2,7 +2,7 @@
 #+OPTIONS: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
 #+OPTIONS: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
 #+OPTIONS: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
-#+TITLE: Mi primera configuracion
+#+TITLE: Mi primera configuración
 # #+DATE: <2017-01-31 mar>
 #+AUTHOR: Rock Neurotiko & Ignacio Ballesteros
 # #+EMAIL: miguelglafuente@gmail.com
@@ -60,7 +60,6 @@
      único. Con Emacs puedo experimentar, conocer, y aprender con más
      libertad. (Ignacio)
 
-
 ** Comandos
    - Control (C)
    - Alt (Meta) (M)
@@ -77,10 +76,10 @@
    - C-s / C-r, buscar
 
 ** Atajos basicos
-   - C-x C-c
-   - C-x C-s (Guardar)
-   - M-x
-   - C-h [f | m | v]
+  - C-x C-c
+  - C-x C-s (Guardar)
+  - M-x
+  - C-h [f | m | v]
 
 * Introducción a elisp
 
@@ -111,7 +110,6 @@
   - Google
 
 * Sin configuración
-
 ** Lo facil...
 
   http://emacs-bootstrap.com/
@@ -133,28 +131,28 @@
 ** Modulos a instalar
 
 **** Tema
-- zenburn-theme
+ - zenburn-theme
 **** Multi-term
-- multi-term
+ - multi-term
 **** Reveal
-- ox-reveal
+ - ox-reveal
 **** Undo
-- undo-tree
+ - undo-tree
 **** git gutter
-- git-gutter-fringe+
+ - git-gutter-fringe+
 **** yasnippet
-- yasnippet
+ - yasnippet
 **** magit
-- magit
+ - magit
 **** spotify
-- spotify
+ - spotify
 **** Elixir
-- elixir-mode
-- alchemist
+ - elixir-mode
+ - alchemist
 **** Scala
-- scala-mode
+ - scala-mode
 **** Python
-- elpy
+ - elpy
 
 * Mi primera configuración
 
@@ -349,7 +347,6 @@
     #+END_SRC
         #+END_NOTES
 
-
 * Configuración basada en org
 ** ¿Qué es org-mode?
 /Modo/ de Emacs para editar texto plano orientado a notas.
@@ -359,9 +356,11 @@
 *** Para una lista más extensa :: http://orgmode.org/features.html
 ** ¿Para qué lo vamos a usar hoy?
 *** ORGanización de nuestra configuración.
-- ~org-babel-tangle-
-  - ~C-c C-v t~    en este fichero (~presentacion.org~)
+- ~org-babel-tangle~
+  - ~C-c C-v t~
+  - En este fichero (~presentacion.org~)
 - Ya tenemos nuestro código en el fichero elegido :)
 - [[./init.el]]
+** 
 - [[./ejemplo_org.el][Ejemplo]] de configuración con /org/.
 * Gracias
